@@ -17,6 +17,7 @@ using WebAPI.Models;
 using WebAPI.Services;
 using WebAPI.JWT;
 using WebAPI.Security;
+using Microsoft.Extensions.Configuration;
 namespace WebAPI.Controllers
 {
 
@@ -27,14 +28,25 @@ namespace WebAPI.Controllers
     {
 
         private readonly Services.UsuarioService _us;
-
-        public TestController(UsuarioService us)
+        public IConfiguration Configuration { get; private set; }
+        public TestController(UsuarioService us, IConfiguration configuration)
         {
             _us = us;
+            this.Configuration = configuration;
 
         }
 
+        [AllowAnonymous]
+        [Route("env")]
+        [HttpGet]
+        public IActionResult getenv()
+        {
 
+            var ENV = this.Configuration["APP_ENV"].ToString();
+            var PORT = this.Configuration["Kestrel:EndPoints:Http:Url"].ToString();
+            return Ok(new { env = ENV, port = PORT });
+
+        }
 
         [AllowAnonymous]
         [Route("encrypt/{pass}")]
