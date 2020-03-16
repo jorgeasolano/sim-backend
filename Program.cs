@@ -22,8 +22,6 @@ namespace shipping_instruction_management
                 {
                     webBuilder.ConfigureKestrel(so =>
                     {
-
-
                     }).UseStartup<Startup>();
                 });
     }
