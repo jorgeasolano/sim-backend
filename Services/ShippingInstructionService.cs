@@ -89,7 +89,7 @@ namespace WebAPI.Services
             {
 
                 var max = this._APIContext.ShippingInstructions.Where(si => si.Fecha.Year == DateTime.Now.Year).Count() + 1;
-                string tempID = DateTime.Now.Year.ToString() + max.ToString("000000");
+                string tempID = DateTime.Now.Year.ToString().Substring(2, 2) + max.ToString("0000");
                 c.Id = long.Parse(tempID);
 
                 var ShippingInstruction_result = this._APIContext.ShippingInstructions.Find(c.Id);
