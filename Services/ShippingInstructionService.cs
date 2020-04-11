@@ -43,7 +43,6 @@ namespace WebAPI.Services
                 .Include(i => i.PuertoDeDespacho)
                 .Include(i => i.Shipper)
                 .Include(i => i.Usuario)
-                .Include(i => i.DestinoFinal)
                 .Include(i => i.Region)
                 .Include(i => i.Commodity)
                 .Include(i => i.ShippingInstructionDetails).ThenInclude(i => i.Servicio).FirstOrDefault();
@@ -109,7 +108,7 @@ namespace WebAPI.Services
                     c.Shipper = null;
                     c.PuertoDeDespacho = null;
                     c.PuertoDeDescarga = null;
-                    c.DestinoFinal = null;
+                   // c.DestinoFinal = null;
                     c.Region = null;
                     c.Carrier = null;
                     c.Usuario = null;

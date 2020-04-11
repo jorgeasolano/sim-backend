@@ -63,9 +63,7 @@ namespace WebAPI.Models
         public Puerto PuertoDeDescarga { get; set; }
 
         [Required]
-        [ForeignKey("DestinoFinal")]
-        public string DestinoFinalId { get; set; }
-        public Destino DestinoFinal { get; set; }
+        public string DestinoFinal { get; set; }
 
         [Required]
         [ForeignKey("Region")]
