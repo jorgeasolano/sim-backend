@@ -87,10 +87,12 @@ namespace WebAPI.Services
             Func<ShippingInstruction> f = delegate
             {
 
-                var max = this._APIContext.ShippingInstructions.Where(si => si.Fecha.Year == DateTime.Now.Year).Count() + 1;
-                string tempID = DateTime.Now.Year.ToString().Substring(2, 2) + max.ToString("0000");
-                c.Id = long.Parse(tempID);
-
+                var maxstr = this._APIContext.ShippingInstructions.Where(si => si.Fecha.Year == DateTime.Now.Year).Max(c => c.Id);
+                //var max =  long.Parse( maxstr.Substring(2,10));
+                //string tempID = DateTime.Now.Year.ToString().Substring(2, 2) + max.ToString("0000");
+                //c.Id = long.Parse(tempID);
+                c.Id = maxstr + 1;
+                
                 var ShippingInstruction_result = this._APIContext.ShippingInstructions.Find(c.Id);
                 if (ShippingInstruction_result != null)
                 {
