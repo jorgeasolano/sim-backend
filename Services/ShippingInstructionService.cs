@@ -91,7 +91,7 @@ namespace WebAPI.Services
 
                 try
                 {
-                    max = this._APIContext.ShippingInstructions.Where(si => si.Fecha.Year == DateTime.Now.Year).Max(c => c.Id);
+                    max = this._APIContext.ShippingInstructions.Where(si => si.Fecha.Year == DateTime.Now.Year).Count();
                 }
                 catch (System.Exception)
                 {
