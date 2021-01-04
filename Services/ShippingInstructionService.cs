@@ -87,18 +87,32 @@ namespace WebAPI.Services
             Func<ShippingInstruction> f = delegate
             {
 
-                var max = this._APIContext.ShippingInstructions.Where(si => si.Fecha.Year == DateTime.Now.Year).Max(c => c.Id);
-               
-    
-                if (max == 0){
+                long max = 1;
+
+                try
+                {
+                    max = this._APIContext.ShippingInstructions.Where(si => si.Fecha.Year == DateTime.Now.Year).Max(c => c.Id);
+                }
+                catch (System.Exception)
+                {
+                    max = 1;
+                    //throw;
+                }
+
+
+
+                if (max == 0)
+                {
                     string tempID = DateTime.Now.Year.ToString().Substring(2, 2) + max.ToString("0000");
                     c.Id = long.Parse(tempID);
-                }else{
+                }
+                else
+                {
                     c.Id = max + 1;
                 }
-                
-                
-                
+
+
+
                 var ShippingInstruction_result = this._APIContext.ShippingInstructions.Find(c.Id);
                 if (ShippingInstruction_result != null)
                 {
@@ -116,7 +130,7 @@ namespace WebAPI.Services
                     c.Shipper = null;
                     c.PuertoDeDespacho = null;
                     c.PuertoDeDescarga = null;
-                   // c.DestinoFinal = null;
+                    // c.DestinoFinal = null;
                     c.Region = null;
                     c.Carrier = null;
                     c.Usuario = null;
