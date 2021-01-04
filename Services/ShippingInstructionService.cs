@@ -108,7 +108,9 @@ namespace WebAPI.Services
                 }
                 else
                 {
-                    c.Id = max + 1;
+                    max = max + 1;
+                    string tempID = DateTime.Now.Year.ToString().Substring(2, 2) + max.ToString("0000");
+                    c.Id = long.Parse(tempID);
                 }
 
 

@@ -1,6 +1,6 @@
 
 #dotnet build --runtime ubuntu.18.04-x64 --configuration Release --no-dependencies
-#dotnet publish -c Release --runtime ubuntu.18.04-x64 --self-contained false
+######dotnet publish -c Release --runtime ubuntu.18.04-x64 --self-contained false
 
 sudo cp -r /home/ubuntu/sim/backend/. /opt/web-apps/demo/backend
 sudo cp -r /home/ubuntu/sim/backend/. /opt/web-apps/cr/backend
