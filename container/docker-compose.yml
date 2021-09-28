@@ -1,0 +1,13 @@
+services:
+  sim-api:
+    build: ../.
+    ports:
+      - "3001:3001"
+    container_name: "sim-api"
+    environment:
+      ASPNETCORE_ENVIRONMENT: dev
+      ASPNETCORE_URLS: "http://*:3001"
+    volumes: 
+      - ~/.aws/credentials:/root/.aws/credentials:ro
+    extra_hosts: 
+      - 'localhost:192.168.1.41' 

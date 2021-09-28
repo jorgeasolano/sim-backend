@@ -13,7 +13,7 @@ using Microsoft.Extensions.Options;
 using System.Security.Claims;
 using System.Security.Principal;
 using System.IdentityModel.Tokens.Jwt;
-using Newtonsoft.Json;
+//using Newtonsoft.Json;
 using System.Net.Http;
 using WebAPI.JWT;
 

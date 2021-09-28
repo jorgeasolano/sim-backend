@@ -18,7 +18,8 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.AspNetCore.HttpOverrides;
-
+using Newtonsoft.Json;
+using Newtonsoft.Json.Serialization;
 
 
 namespace shipping_instruction_management
@@ -28,10 +29,18 @@ namespace shipping_instruction_management
 
 
 
-
-        public Startup(IConfiguration configuration)
+        private dynamic secrets;
+        public Startup(IConfiguration configuration, IWebHostEnvironment env)
         {
             Configuration = configuration;
+            string EnvName = env.EnvironmentName;
+            string result = string.Format("- Environment: {0}", EnvName);
+            Console.WriteLine(result);
+
+
+            WebAPI.Services.AWSSecretsService awsSecrets = new();
+            secrets = JsonConvert.DeserializeObject(awsSecrets.GetSecret(EnvName));
+
         }
 
         public IConfiguration Configuration { get; }
@@ -53,9 +62,11 @@ namespace shipping_instruction_management
                                                             .AllowAnyMethod()
                                                              .AllowAnyHeader()));
 
+            string connstr = secrets.connstr;
+
             //* DBContext
             services.AddDbContext<WebAPI.Models.APIContext>(options =>
-            options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"))
+            options.UseSqlServer(connstr)
             );
 
             //* Services

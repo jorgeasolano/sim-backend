@@ -12,7 +12,7 @@ using Microsoft.AspNetCore.Authorization;
 using System.Security.Claims;
 using System.Security.Principal;
 using System.IdentityModel.Tokens.Jwt;
-using Newtonsoft.Json;
+//using Newtonsoft.Json;
 using WebAPI.Models;
 using WebAPI.Services;
 using WebAPI.JWT;
