@@ -29,5 +29,10 @@ namespace WebAPI.Models
         public string Email { get; set; }
 
 
+        [Required]
+        public string LegalId { get; set; }
+
+
+
     }
 }

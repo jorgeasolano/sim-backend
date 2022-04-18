@@ -138,5 +138,11 @@ namespace WebAPI.Models
         public string PrintToken { get; set; }
 
 
+        public bool Insurance { get; set; }
+        public bool CustomClearance { get; set; }
+        public bool LocalDelivery { get; set; }
+
+
+
     }
 }

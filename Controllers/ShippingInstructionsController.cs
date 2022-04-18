@@ -40,6 +40,22 @@ namespace WebAPI.Controllers
 
         }
 
+        // GET: api/ShippingInstructionsChartReport
+        [HttpGet("GetShippingInstructionsChartReport")]
+        public  APIResponse<List<Dictionary<string, object>>> GetShippingInstructionsChartReport(string filtro,DateTime desde, DateTime hasta)
+        {
+            
+            Func<ServiceResponse<List<Dictionary<string, object>>>>  f = delegate {
+
+                return _cs.GetShippingInstructionsChartReport(desde,hasta, GetAuthenticatedUsuarioID);
+
+            };
+            return this.CastToAPIResponse(f);
+
+        }
+
+
+
         // GET: api/ShippingInstructions/5
         [HttpGet("{id}")]
         public APIResponse<ShippingInstruction> GetShippingInstruction([FromRoute] long id)

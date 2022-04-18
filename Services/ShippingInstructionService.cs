@@ -79,6 +79,27 @@ namespace WebAPI.Services
             return this.Execute(f);
         }
 
+        public ServiceResponse<List<Dictionary<string, object>>> GetShippingInstructionsChartReport(DateTime desde, DateTime hasta, string UsuarioId)
+        {
+
+            Func<List<Dictionary<string, object>>> f = delegate
+             {
+
+                 return this.ExecuteStoreProcedure(cmd =>
+                 {
+
+                     cmd.CommandText = "getShippingInstructionsChartReport";
+                     SetParameterCommand(cmd, "desde", desde);
+                     SetParameterCommand(cmd, "hasta", hasta);
+                     SetParameterCommand(cmd, "UsuarioID", UsuarioId);
+
+                 });
+
+
+             };
+            return this.Execute(f);
+        }
+        
 
         public ServiceResponse<ShippingInstruction> CreateShippingInstruction(ShippingInstruction c)
         {
@@ -119,13 +140,13 @@ namespace WebAPI.Services
                 if (ShippingInstruction_result != null)
                 {
 
-                    throw new Exception("ShippingInstruction ya existe");
+                    throw new Exception("Shipping Instruction already exists");
                 }
                 else
                 {
 
 
-
+                    c.Fecha = DateTime.Now;
                     c.Cliente = null;
                     c.Agente = null;
                     c.Consignatario = null;
@@ -136,7 +157,7 @@ namespace WebAPI.Services
                     c.Region = null;
                     c.Carrier = null;
                     c.Usuario = null;
-                    c.Commodity = null;
+                    c.Commodity =  null;
                     c.PrintToken = Guid.NewGuid().ToString();
 
                     if (c.LugarDeCarga == "") { c.LugarDeCarga = " "; };
@@ -149,8 +170,9 @@ namespace WebAPI.Services
                         item.Servicio = null;
                     }
 
-
-
+                    c.CommodityId = "1";
+                   //  c.Commodity =  new Commodity { Id = "1", Nombre = "Aeronautic Equipment"};
+                    
                     _APIContext.ShippingInstructions.Add(c);
                     _APIContext.SaveChanges();
                     return c;

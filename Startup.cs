@@ -38,8 +38,8 @@ namespace shipping_instruction_management
             Console.WriteLine(result);
 
 
-            WebAPI.Services.AWSSecretsService awsSecrets = new();
-            secrets = JsonConvert.DeserializeObject(awsSecrets.GetSecret(EnvName));
+           // WebAPI.Services.AWSSecretsService awsSecrets = new();
+           // secrets = JsonConvert.DeserializeObject(awsSecrets.GetSecret(EnvName));
 
         }
 
@@ -62,11 +62,12 @@ namespace shipping_instruction_management
                                                             .AllowAnyMethod()
                                                              .AllowAnyHeader()));
 
-            string connstr = secrets.connstr;
+//            string connstr = secrets.connstr;
 
             //* DBContext
             services.AddDbContext<WebAPI.Models.APIContext>(options =>
-            options.UseSqlServer(connstr)
+            // options.UseSqlServer(connstr)
+            options.UseSqlServer("Data Source=localhost;Initial Catalog=oblogistics;Persist Security Info=False;User ID=sa;Password=Sample123*;")
             );
 
             //* Services
